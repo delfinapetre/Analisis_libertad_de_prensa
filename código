@@ -1,0 +1,24 @@
+library(tidyverse)
+library(gganimate)
+libertad_prensa <- readr::read_csv (
+"https://raw.githubusercontent.com/cienciadedatos/datos-de-miercoles/master/datos/2020/2020-03-25/libertad_prensa.csv")
+
+mercosur <- libertad_prensa %>%
+filter(pais%in% c("Argentina", "Brasil", "Uruguay", "Venezuela", "Paraguay")) %>%
+filter(anio > 2003) %>%
+select(pais,anio,indice)
+
+g.compara <- 
+ggplot (mercosur, aes(x=anio, y=indice)) +
+geom_line(aes(color=pais)) +
+geom_point(aes(color=pais)) +
+theme_minimal() + 
+theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust =0.5),
+legend.tittle =element_blanck()) +
+labs(tittle ="indice de libertad de prensa", 
+subtitle = "paises miembros de Mercosur",
+x="años", y="indice"))
+
+anim <- g.compara + transition_reveal(anio)
+anim2<- animate(anim)
+anim_save("anim2.gif)
