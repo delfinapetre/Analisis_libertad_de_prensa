@@ -14,10 +14,10 @@ geom_line(aes(color=pais)) +
 geom_point(aes(color=pais)) +
 theme_minimal() + 
 theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust =0.5),
-legend.tittle =element_blanck()) +
+legend.tittle =element_blank()) +
 labs(tittle ="indice de libertad de prensa", 
 subtitle = "paises miembros de Mercosur",
-x="años", y="indice"))
+x="años", y="indice")
 
 anim <- g.compara + transition_reveal(anio)
 anim2<- animate(anim)
